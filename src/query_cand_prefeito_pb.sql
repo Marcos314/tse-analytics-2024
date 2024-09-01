@@ -7,7 +7,7 @@ WHERE NM_UE = 'JOÃO PESSOA' AND (DS_CARGO='PREFEITO' OR DS_CARGO='VICE-PREFEITO
 with tb_candidates_jp as (
 	select SQ_CANDIDATO,
 		SG_UF,
-		DS_CARGO,	
+		DS_CARGO,
 		SG_PARTIDO,
 		NM_PARTIDO,
 		DT_NASCIMENTO,
@@ -17,17 +17,33 @@ with tb_candidates_jp as (
 		DS_OCUPACAO,
 		NM_UE,
 		NM_CANDIDATO
-	from tb_candidaturas 
+	from tb_candidaturas
 	where NM_UE = 'JOÃO PESSOA'
 ),
 tb_total_bem_candidates_jp as (
 select SQ_CANDIDATO,
 	sum(cast(replace(VR_BEM_CANDIDATO,',', '.') as DECIMAL(15,2))) as total_bens
-from tb_bens tb 
+from tb_bens tb
 group by 1
-)
-
+),
+tb_info_completa_cand as (
 select t1.*, COALESCE(t2.total_bens, 0) as total_bens
 from tb_candidates_jp as t1
 left join tb_total_bem_candidates_jp as t2
-on t1.SQ_CANDIDATO = t2.SQ_CANDIDATO;
+on t1.SQ_CANDIDATO = t2.SQ_CANDIDATO
+)
+
+
+SELECT
+	SG_PARTIDO,
+	NM_PARTIDO,
+	SG_UF,
+	AVG(CASE WHEN DS_GENERO = 'FEMININO' THEN 1 ELSE 0 END) tx_feminino,
+	AVG(CASE WHEN DS_COR_RACA = 'PRETA' THEN 1 ELSE 0 END) tx_branca,
+
+FROM tb_info_completa_cand
+GROUP BY 1,2;
+
+
+
+

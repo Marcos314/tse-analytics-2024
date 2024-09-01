@@ -3,9 +3,10 @@ import json
 import pandas as pd
 import sqlalchemy
 
-engine = sqlalchemy.create_engine('sqlite:///../data/database.db')
+engine = sqlalchemy.create_engine('sqlite:///../data/database_br.db')
 
-with open('ingestions.json', 'r') as open_file:
+
+with open('ingestions_br.json', 'r') as open_file:
     ingestions = json.load(open_file)
 
 # breakpoint()
