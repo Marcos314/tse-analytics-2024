@@ -9,6 +9,10 @@ readme = "README.md"
 python = "^3.10"
 sqlalchemy = "^2.0.32"
 pandas = "^2.2.2"
+matplotlib = "^3.9.2"
+numpy = "^2.1.0"
+seaborn = "^0.13.2"
+adjusttext = "^1.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
