@@ -13,6 +13,7 @@ matplotlib = "^3.9.2"
 numpy = "^2.1.0"
 seaborn = "^0.13.2"
 adjusttext = "^1.2.0"
+scikit-learn = "^1.5.1"
 
 
 [tool.poetry.group.dev.dependencies]
